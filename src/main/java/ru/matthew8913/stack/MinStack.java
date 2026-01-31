@@ -1,6 +1,5 @@
 package ru.matthew8913.stack;
 
-import java.sql.Array;
 import java.util.ArrayDeque;
 import java.util.Deque;
 
@@ -15,26 +14,26 @@ class MinStack {
     }
 
     public void push(int val) {
-        if(stack.isEmpty()){
+        if (stack.isEmpty()) {
             stack.push(0L);
             min = val;
-        }else{
+        } else {
             stack.push(val - min);
-            if(val<min) min = val;
+            if (val < min) min = val;
         }
     }
 
     public void pop() {
-        if(stack.isEmpty()) return;
+        if (stack.isEmpty()) return;
         long pop = stack.pop();
-        if(pop<0){
+        if (pop < 0) {
             min = min - pop;
         }
     }
 
     public int top() {
         long peek = stack.peek();
-        if(peek<0) return Math.toIntExact(min);
+        if (peek < 0) return Math.toIntExact(min);
         else return Math.toIntExact(min + peek);
     }
 

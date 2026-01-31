@@ -6,36 +6,6 @@ import java.util.Deque;
 import java.util.Objects;
 
 public class EvaluateReversePolishNotation {
-    public int evalRPN(String[] tokens) {
-        Deque<Integer> operands = new ArrayDeque<>();
-        for (String token : tokens) {
-            if (isOperator(token)) {
-                int op2 = operands.pop();
-                int op1 = operands.pop();
-                operands.push(evaluate(op1, op2, token));
-            } else {
-                operands.push(Integer.parseInt(token));
-
-            }
-        }
-        return operands.pop();
-
-    }
-
-    public boolean isOperator(String s){
-       return Objects.equals(s, "/") || Objects.equals(s, "*") || Objects.equals(s, "+") || Objects.equals(s, "-");
-    }
-
-    public int evaluate(int op1, int op2, String operator){
-        return switch (operator) {
-            case "+" -> op1 + op2;
-            case "-" -> op1 - op2;
-            case "*" -> op1 * op2;
-            case "/" -> op1 / op2;
-            default -> 0;
-        };
-    }
-
     public static void main(String[] args) {
         EvaluateReversePolishNotation solution = new EvaluateReversePolishNotation();
 
@@ -75,5 +45,35 @@ public class EvaluateReversePolishNotation {
             System.out.printf("❌ CRASH | Input: %s | Expected: %d | Exception: %s%n",
                     Arrays.toString(tokens), expected, e.getClass().getSimpleName());
         }
+    }
+
+    public int evalRPN(String[] tokens) {
+        Deque<Integer> operands = new ArrayDeque<>();
+        for (String token : tokens) {
+            if (isOperator(token)) {
+                int op2 = operands.pop();
+                int op1 = operands.pop();
+                operands.push(evaluate(op1, op2, token));
+            } else {
+                operands.push(Integer.parseInt(token));
+
+            }
+        }
+        return operands.pop();
+
+    }
+
+    public boolean isOperator(String s) {
+        return Objects.equals(s, "/") || Objects.equals(s, "*") || Objects.equals(s, "+") || Objects.equals(s, "-");
+    }
+
+    public int evaluate(int op1, int op2, String operator) {
+        return switch (operator) {
+            case "+" -> op1 + op2;
+            case "-" -> op1 - op2;
+            case "*" -> op1 * op2;
+            case "/" -> op1 / op2;
+            default -> 0;
+        };
     }
 }
