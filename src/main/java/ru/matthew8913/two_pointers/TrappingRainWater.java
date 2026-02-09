@@ -6,14 +6,14 @@ public class TrappingRainWater {
         int r = height.length - 1;
         int leftWall = height[l];
         int rightWall = height[r];
-        int totalWater=0;
-        while(l<r){
-            if(rightWall<leftWall){
+        int totalWater = 0;
+        while (l < r) {
+            if (rightWall < leftWall) {
                 r--;
                 rightWall = Math.max(rightWall, height[r]);
                 int maxLevel = rightWall;
                 totalWater += maxLevel - height[r];
-            }else{
+            } else {
                 l++;
                 leftWall = Math.max(leftWall, height[l]);
                 int maxLevel = leftWall;

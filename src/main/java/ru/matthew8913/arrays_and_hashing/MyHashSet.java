@@ -3,7 +3,7 @@ package ru.matthew8913.arrays_and_hashing;
 
 class MyHashSet {
 
-    private boolean[] array;
+    private final boolean[] array;
 
     public MyHashSet() {
         array = new boolean[1_000_001];

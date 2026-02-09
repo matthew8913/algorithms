@@ -6,7 +6,7 @@ public class MergeStringsAlternately {
         int n = word2.length(), i = 0;
 
         StringBuilder merged = new StringBuilder();
-        while(j<m && i <n){
+        while (j < m && i < n) {
             merged.append(word1.charAt(j++));
             merged.append(word2.charAt(i++));
         }
@@ -18,8 +18,8 @@ public class MergeStringsAlternately {
     }
 
     public String mergeAlternately1(String word1, String word2) {
-        String longString = word1.length() > word2.length()? word1 : word2;
-        String shortString = word1.length() > word2.length()? word2 : word1;
+        String longString = word1.length() > word2.length() ? word1 : word2;
+        String shortString = word1.length() > word2.length() ? word2 : word1;
 
         StringBuilder merged = new StringBuilder();
         for (int i = 0; i < shortString.length(); i++) {

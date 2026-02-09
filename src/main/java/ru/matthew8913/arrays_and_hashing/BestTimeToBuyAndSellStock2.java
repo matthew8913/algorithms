@@ -5,8 +5,8 @@ public class BestTimeToBuyAndSellStock2 {
         int prev = prices[0];
         int sum = 0;
         for (int price : prices) {
-            if(price>prev) {
-                sum+= price-prev;
+            if (price > prev) {
+                sum += price - prev;
             }
             prev = price;
         }
@@ -15,7 +15,7 @@ public class BestTimeToBuyAndSellStock2 {
     }
 
     public static void main(String[] args) {
-        int[] prices = new int[]{7,1,5,3,6,4};
+        int[] prices = new int[]{7, 1, 5, 3, 6, 4};
         System.out.println(maxProfit(prices));
     }
 }
