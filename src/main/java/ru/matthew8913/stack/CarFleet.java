@@ -17,10 +17,10 @@ public class CarFleet {
         int result1 = solution.carFleet(target1, position1, speed1);
         System.out.println("Test 1 Result: " + result1); // Ожидается: 3
 
-        // Тест кейс 2: Один автомобиль
+        // Тест кейс 2: 1
         int target2 = 10;
-        int[] position2 = {3};
-        int[] speed2 = {3};
+        int[] position2 = {1, 4};
+        int[] speed2 = {3, 2};
 
         int result2 = solution.carFleet(target2, position2, speed2);
         System.out.println("Test 2 Result: " + result2); // Ожидается: 1
@@ -35,45 +35,38 @@ public class CarFleet {
     }
 
     public int carFleet(int target, int[] position, int[] speed) {
-        // Сортируем: в начале списка те, кто ближе к финишу (большая позиция)
-        Deque<Car> cars = new ArrayDeque<>(getSortedCars(position, speed));
-
-        int fleets = 0;
-        while (cars.size() >= 2) {
-            Car carAhead = cars.pop();
-            Car carBehind = cars.pop();
-
-            if (isFleet(carBehind, carAhead, target)) {
-                cars.push(carAhead);
+        Deque<CarInfo> carsStack = new ArrayDeque<>(getSortedCars(position, speed));
+        int count = 0;
+        while (!carsStack.isEmpty()) {
+            CarInfo lastCar = carsStack.pop();
+            if (!carsStack.isEmpty() && isFleet(carsStack.peek(), lastCar, target)) {
+                carsStack.pop();
+                carsStack.push(lastCar);
             } else {
-                fleets++;
-                cars.push(carBehind);
+                count++;
             }
+
         }
 
-        if (!cars.isEmpty()) {
-            fleets++;
-        }
-
-        return fleets;
+        return count;
     }
 
-    public List<Car> getSortedCars(int[] position, int[] speed) {
-        List<Car> cars = new ArrayList<>();
+    private boolean isFleet(CarInfo first, CarInfo second, int target) {
+        double timeToTarget1 = (double) (target - first.position) / first.speed;
+        double timeToTarget2 = (double) (target - second.position) / second.speed;
+        return timeToTarget1 <= timeToTarget2;
+    }
+
+    private List<CarInfo> getSortedCars(int[] position, int[] speed) {
+        List<CarInfo> cars = new ArrayList<>();
         for (int i = 0; i < position.length; i++) {
-            cars.add(new Car(position[i], speed[i]));
+            cars.add(new CarInfo(position[i], speed[i]));
         }
         cars.sort((car1, car2) -> car2.position - car1.position);
+
         return cars;
     }
 
-    public boolean isFleet(Car behind, Car ahead, int target) {
-        double timeBehind = (double) (target - behind.position) / behind.speed;
-        double timeAhead = (double) (target - ahead.position) / ahead.speed;
-
-        return timeBehind <= timeAhead;
-    }
-
-    public record Car(int position, int speed) {
+    public record CarInfo(int position, int speed) {
     }
 }

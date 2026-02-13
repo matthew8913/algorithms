@@ -5,22 +5,23 @@ import java.util.Deque;
 
 public class LargestRectangleInHistogram {
     public int largestRectangleArea(int[] heights) {
+        Deque<Pair> st = new ArrayDeque<>();
         int maxArea = 0;
-        Deque<Integer> st = new ArrayDeque<>(); // indices
         for (int i = 0; i <= heights.length; i++) {
-            int curH = (i == heights.length) ? 0 : heights[i];
+            int curH = i == heights.length ? 0 : heights[i];
+            while (!st.isEmpty() && curH < st.peek().height) {
+                Pair popped = st.pop();
 
-            while (!st.isEmpty() && heights[st.peek()] >= curH) {
-                int h = heights[st.pop()];
-                int leftInd = st.isEmpty() ? -1 : st.peek();
-                int width = i - 1 - leftInd;
-                maxArea = Math.max(maxArea, h * width);
+                int width = st.isEmpty() ? i : i - st.peek().ind - 1;
+
+                maxArea = Math.max(maxArea, width * popped.height);
             }
-
-            st.push(i);
+            st.push(new Pair(i, heights[i]));
         }
         return maxArea;
     }
 
+    private record Pair(int ind, int height) {
+    }
 
 }

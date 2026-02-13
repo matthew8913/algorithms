@@ -5,39 +5,37 @@ import java.util.Deque;
 
 class MinStack {
 
-    private final Deque<Long> stack;
+    private Deque<Integer> st;
 
-    private long min;
+    private int min;
 
     public MinStack() {
-        stack = new ArrayDeque<>();
+        st = new ArrayDeque<>();
+        min = Integer.MAX_VALUE;
     }
 
     public void push(int val) {
-        if (stack.isEmpty()) {
-            stack.push(0L);
-            min = val;
-        } else {
-            stack.push(val - min);
-            if (val < min) min = val;
-        }
+        st.push(val - min);
+        if (val < min) min = val;
     }
 
     public void pop() {
-        if (stack.isEmpty()) return;
-        long pop = stack.pop();
-        if (pop < 0) {
-            min = min - pop;
+        int popped = st.pop();
+        if (popped < 0) {
+            min -= popped;
         }
     }
 
     public int top() {
-        long peek = stack.peek();
-        if (peek < 0) return Math.toIntExact(min);
-        else return Math.toIntExact(min + peek);
+        int last = st.peek();
+        if (last < 0) {
+            return min;
+        } else {
+            return min + last;
+        }
     }
 
     public int getMin() {
-        return Math.toIntExact(min);
+        return min;
     }
 }
