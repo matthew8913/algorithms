@@ -8,8 +8,8 @@ import java.util.Map;
 import static java.lang.Math.max;
 
 class FreqStack {
-    private Map<Integer, Integer> valueToFreq;
-    private Map<Integer, Deque<Integer>> freqToValues;
+    private final Map<Integer, Integer> valueToFreq;
+    private final Map<Integer, Deque<Integer>> freqToValues;
     private int maxFreq;
 
     public FreqStack() {

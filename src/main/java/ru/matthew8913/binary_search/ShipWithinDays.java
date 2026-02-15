@@ -3,39 +3,6 @@ package ru.matthew8913.binary_search;
 import java.util.Arrays;
 
 public class ShipWithinDays {
-    public int shipWithinDays(int[] weights, int days) {
-        int l = Arrays.stream(weights).max().getAsInt();
-        int r = Arrays.stream(weights).sum();
-        int res = r;
-        while(l<=r){
-            int mid = l + (r-l)/2;
-            int totalDays = countDays(mid, weights);
-            if(totalDays > days){
-                l = mid+1;
-            }else{
-                res = mid;
-                r = mid -1;
-            }
-        }
-        return res;
-    }
-
-    public int countDays(int capacity, int[] weights){
-        int count = 0;
-        int occupancy = 0;
-        for (int weight : weights) {
-            occupancy += weight;
-            if (occupancy >= capacity) {
-                count++;
-                occupancy = occupancy == capacity ? 0 : weight;
-            }
-        }
-
-        if(occupancy !=0) count ++;
-
-        return count;
-    }
-
     public static void main(String[] args) {
         ShipWithinDays s = new ShipWithinDays();
 
@@ -78,6 +45,39 @@ public class ShipWithinDays {
         int[] w10 = {2, 2, 2, 2, 2};
         int d10 = 1;
         System.out.println("Test 10: " + s.shipWithinDays(w10, d10) + " (expected: 10)");
+    }
+
+    public int shipWithinDays(int[] weights, int days) {
+        int l = Arrays.stream(weights).max().getAsInt();
+        int r = Arrays.stream(weights).sum();
+        int res = r;
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
+            int totalDays = countDays(mid, weights);
+            if (totalDays > days) {
+                l = mid + 1;
+            } else {
+                res = mid;
+                r = mid - 1;
+            }
+        }
+        return res;
+    }
+
+    public int countDays(int capacity, int[] weights) {
+        int count = 0;
+        int occupancy = 0;
+        for (int weight : weights) {
+            occupancy += weight;
+            if (occupancy >= capacity) {
+                count++;
+                occupancy = occupancy == capacity ? 0 : weight;
+            }
+        }
+
+        if (occupancy != 0) count++;
+
+        return count;
     }
 
 

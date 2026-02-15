@@ -5,7 +5,7 @@ import java.util.Deque;
 
 class MinStack {
 
-    private Deque<Integer> st;
+    private final Deque<Integer> st;
 
     private int min;
 

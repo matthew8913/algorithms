@@ -21,15 +21,15 @@ class TimeMap {
 
     public String get(String key, int timestamp) {
         List<Integer> times = keyTimes.get(key);
-        if(times == null || times.isEmpty()){
+        if (times == null || times.isEmpty()) {
             return "";
         }
 
         int ind = floorIndex(times, timestamp);
 
-        if(ind == -1){
+        if (ind == -1) {
             return "";
-        }else return keyValues.get(key).get(ind);
+        } else return keyValues.get(key).get(ind);
 
     }
 
@@ -38,14 +38,14 @@ class TimeMap {
         int r = nums.size() - 1;
         int res = -1;
 
-        while(l<=r){
-            int mid = l + (r-l)/2;
+        while (l <= r) {
+            int mid = l + (r - l) / 2;
             int midVal = nums.get(mid);
 
-            if(midVal <= nums.get(r)){
+            if (midVal <= nums.get(r)) {
                 res = mid;
                 l = mid + 1;
-            }else{
+            } else {
                 r = mid - 1;
             }
         }

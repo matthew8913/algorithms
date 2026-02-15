@@ -1,6 +1,18 @@
 package ru.matthew8913.binary_search;
 
 public class SplitArrayLargestSum {
+    public static void main(String[] args) {
+        SplitArrayLargestSum sol = new SplitArrayLargestSum();
+
+        int[] nums1 = {2, 4, 10, 1, 5}; //16
+        int k1 = 2;
+        System.out.println(sol.splitArray(nums1, k1));
+
+        int[] nums2 = {1, 0, 2, 3, 5}; //5
+        int k2 = 4;
+        System.out.println(sol.splitArray(nums2, k2));
+    }
+
     public int splitArray(int[] nums, int k) {
         int l = 0;
         int r = 0;
@@ -40,20 +52,8 @@ public class SplitArrayLargestSum {
             }
         }
 
-        if(occupancy > 0) count ++;
+        if (occupancy > 0) count++;
         return count;
-    }
-
-    public static void main(String[] args) {
-        SplitArrayLargestSum sol = new SplitArrayLargestSum();
-
-        int[] nums1 = {2, 4, 10, 1, 5}; //16
-        int k1 = 2;
-        System.out.println(sol.splitArray(nums1, k1));
-
-        int[] nums2 = {1, 0, 2, 3, 5}; //5
-        int k2 = 4;
-        System.out.println(sol.splitArray(nums2, k2));
     }
 
 }

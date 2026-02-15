@@ -2,22 +2,18 @@ package ru.matthew8913.binary_search;
 
 public class BinarySearch {
     public int search(int[] nums, int target) {
-        return binarySearch(nums, 0, nums.length, target);
-    }
+        int l = 0, r = nums.length - 1;
 
-    private int binarySearch(int[] nums, int l, int r, int target) {
-        if (l == r) return -1;
-        int midInd = l + (r - l) / 2;
-
-
-        if (target > nums[midInd]) {
-            l = midInd + 1;
-        } else if (target < nums[midInd]) {
-            r = midInd;
-        } else {
-            return midInd;
+        while (l <= r) {
+            int m = l + ((r - l) / 2);
+            if (nums[m] > target) {
+                r = m - 1;
+            } else if (nums[m] < target) {
+                l = m + 1;
+            } else {
+                return m;
+            }
         }
-
-        return binarySearch(nums, l, r, target);
+        return -1;
     }
 }
